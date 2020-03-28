@@ -18,32 +18,32 @@
 
     <groupId>org.eclipse.microprofile.config</groupId>
     <artifactId>microprofile-config-parent</artifactId>
-    <version>1.4</version>
+    <version>2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MicroProfile Config</name>
     <description>Eclipse MicroProfile Config Feature :: Parent POM</description>
-    <url>http://microprofile.io</url>
+    <url>https://microprofile.io</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <links>https://osgi.org/javadoc/r6/annotation/</links>
-        
+        <links>https://osgi.org/javadoc/osgi.annotation/7.0.0/</links>
+
         <checkstyle.version>2.17</checkstyle.version>
         <checkstyle.methodNameFormat>^_?[a-z][a-zA-Z0-9]*$</checkstyle.methodNameFormat>
     </properties>
 
     <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
+            <name>Apache-2.0</name>
+            <comments>Apache License, Version 2.0</comments>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
-    
+
     <organization>
         <name>Eclipse Foundation</name>
         <url>http://www.eclipse.org/</url>
@@ -56,28 +56,31 @@
 
     <developers>
         <developer>
+            <id>Emily-Jiang</id>
             <name>Emily Jiang</name>
             <url>https://github.com/Emily-Jiang</url>
             <organization>IBM</organization>
             <organizationUrl>https://www.ibm.com</organizationUrl>
-        </developer>    
+        </developer>
         <developer>
+            <id>struberg</id>
             <name>Mark Struberg</name>
             <url>https://github.com/struberg</url>
-        </developer>    
+        </developer>
         <developer>
+            <id>OndrejM</id>
             <name>Ondro Mihalyi</name>
             <url>https://github.com/OndrejM</url>
             <organization>Payara Services</organization>
             <organizationUrl>https://www.payara.fish</organizationUrl>
-        </developer>    
+        </developer>
     </developers>
 
     <scm>
         <connection>scm:git:https://github.com/eclipse/microprofile-config.git</connection>
         <developerConnection>scm:git:git@github.com:eclipse/microprofile-config.git</developerConnection>
         <url>https://github.com/eclipse/microprofile-config</url>
-        <tag>1.4</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
@@ -103,6 +106,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>biz.aQute.bnd.annotation</artifactId>
+                <version>${bnd.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
                 <groupId>javax.enterprise</groupId>
                 <artifactId>cdi-api</artifactId>
                 <version>1.2</version>
@@ -119,6 +128,18 @@
                 <version>1.1.13.Final</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.cdi</artifactId>
+                <version>1.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.annotation</artifactId>
+                <version>7.0.0</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -223,7 +244,7 @@
                             </module>
                             <module name="FileTabCharacter" />
                             <module name="TreeWalker">
-                                
+
                                 <module name="ConstantName">
                                     <property name="format" value="^(([A-Z][A-Z0-9]*(_[A-Z0-9]+)*))$" />
                                 </module>
@@ -308,13 +329,14 @@
                         <exclude>.checkstyle</exclude>
                         <exclude>.factorypath</exclude>
                         <exclude>.editorconfig</exclude>
+                        <exclude>.github/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
 
         </plugins>
     </build>
-    
+
     <profiles>
         <profile>
             <id>release</id>
